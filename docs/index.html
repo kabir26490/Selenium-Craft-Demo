@@ -166,53 +166,53 @@
             line-height: 1.7;
         }
 
-        /* ─── Comparison Cards (Apple-Style) ─── */
-        .comparison-cards {
-            margin-top: 60px;
+        /* ─── Apple-Style Comparison Table ─── */
+        .apple-compare {
+            margin-top: 64px;
+            width: 100%;
+        }
+
+        .ac-header {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
+            grid-template-columns: 2fr 1fr 1fr;
+            padding: 0 0 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
         }
 
-        .comparison-card {
-            padding: 48px 40px;
-            background: transparent;
-            border: 1px solid var(--border-muted);
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 28px;
-        }
-
-        .comparison-title {
-            font-size: 1.3rem;
+        .ac-header-cell {
+            font-size: 0.95rem;
             font-weight: 700;
-            letter-spacing: -0.02em;
+            color: #fff;
+            letter-spacing: -0.01em;
         }
 
-        .comparison-item {
-            padding: 16px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+        .ac-header-cell:not(:first-child) {
+            text-align: center;
+        }
+
+        .ac-row {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            grid-template-columns: 2fr 1fr 1fr;
+            padding: 22px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
             align-items: center;
         }
 
-        .comparison-item:last-child { border-bottom: none; }
+        .ac-row:last-child { border-bottom: none; }
 
-        .item-label {
-            font-size: 0.95rem;
-            color: #999;
+        .ac-feature {
+            font-size: 1.05rem;
+            color: #d1d5db;
+            font-weight: 400;
         }
 
-        .item-value {
-            font-size: 1rem;
-            font-weight: 600;
+        .ac-val {
+            text-align: center;
+            font-size: 1.4rem;
         }
 
-        .value-bad { color: #e74c3c; }
-        .value-good { color: var(--accent-craft); }
+        .ac-val.bad  { color: #ff3b30; }
+        .ac-val.good { color: #30d158; }
 
         /* ─── Button ─── */
         .btn {
@@ -305,37 +305,36 @@
             </div>
         </div>
 
-        <div class="comparison-cards">
-            <div class="comparison-card">
-                <div class="comparison-title">Traditional Selenium</div>
-                <div class="comparison-item">
-                    <div class="item-label">Stale Handling</div>
-                    <div class="item-value value-bad">Crash</div>
-                </div>
-                <div class="comparison-item">
-                    <div class="item-label">Shadow Root</div>
-                    <div class="item-value value-bad">Hidden</div>
-                </div>
-                <div class="comparison-item">
-                    <div class="item-label">Boilerplate</div>
-                    <div class="item-value value-bad">High</div>
-                </div>
+        <div class="apple-compare">
+            <div class="ac-header">
+                <div class="ac-header-cell"></div>
+                <div class="ac-header-cell">Selenium</div>
+                <div class="ac-header-cell">SeleniumCraft</div>
             </div>
-
-            <div class="comparison-card">
-                <div class="comparison-title">SeleniumCraft</div>
-                <div class="comparison-item">
-                    <div class="item-label">Stale Handling</div>
-                    <div class="item-value value-good">Auto-Heal</div>
-                </div>
-                <div class="comparison-item">
-                    <div class="item-label">Shadow Root</div>
-                    <div class="item-value value-good">Accessible</div>
-                </div>
-                <div class="comparison-item">
-                    <div class="item-label">Boilerplate</div>
-                    <div class="item-value value-good">Zero</div>
-                </div>
+            <div class="ac-row">
+                <div class="ac-feature">Stale Element Recovery</div>
+                <div class="ac-val bad">&#x2715;</div>
+                <div class="ac-val good">&#x2714;</div>
+            </div>
+            <div class="ac-row">
+                <div class="ac-feature">Shadow-DOM Access</div>
+                <div class="ac-val bad">&#x2715;</div>
+                <div class="ac-val good">&#x2714;</div>
+            </div>
+            <div class="ac-row">
+                <div class="ac-feature">iFrame Auto-Restore</div>
+                <div class="ac-val bad">&#x2715;</div>
+                <div class="ac-val good">&#x2714;</div>
+            </div>
+            <div class="ac-row">
+                <div class="ac-feature">Zero Boilerplate</div>
+                <div class="ac-val bad">&#x2715;</div>
+                <div class="ac-val good">&#x2714;</div>
+            </div>
+            <div class="ac-row">
+                <div class="ac-feature">Smart Retry Engine</div>
+                <div class="ac-val bad">&#x2715;</div>
+                <div class="ac-val good">&#x2714;</div>
             </div>
         </div>
     </div>
