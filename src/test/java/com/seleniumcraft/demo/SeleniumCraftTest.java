@@ -1,14 +1,20 @@
 package com.seleniumcraft.demo;
 
+import com.seleniumcraft.core.SeleniumCraft;
+import com.seleniumcraft.core.SmartElement;
+import com.seleniumcraft.core.DriverContext;
 import com.seleniumcraft.driver.DriverFactory;
-import com.seleniumcraft.wait.RetryEngine;
 import com.seleniumcraft.context.FrameHelper;
-import com.seleniumcraft.element.SmartElement;
+import com.seleniumcraft.wait.RetryEngine;
 import com.seleniumcraft.reporting.ExtentReportManager;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.*;
+
+import java.util.List;
 
 /**
  * ✅ SELENIUMCRAFT TEST - THE NEW WAY ✅
@@ -28,7 +34,7 @@ public class SeleniumCraftTest {
 
     @BeforeMethod
     public void setUp() {
-        // ✅ SOLUTION: One-line browser initialization
+        // ✅ SOLUTION: One-line browser initialization with DriverContext
         driver = DriverFactory.initChrome();
         driver.manage().window().maximize();
         driver.get("https://the-internet.herokuapp.com");
@@ -53,45 +59,49 @@ public class SeleniumCraftTest {
 
         driver.get("https://the-internet.herokuapp.com/login");
 
-        // ✅ SOLUTION: One-liner type() method with built-in wait
-        SmartElement.of(driver, By.id("username")).type("tomsmith");
-        SmartElement.of(driver, By.id("password")).type("SuperSecretPassword!");
+        // ✅ SOLUTION: SeleniumCraft.$() factory + type() with built-in wait
+        SeleniumCraft.$(By.id("username")).type("tomsmith");
+        SeleniumCraft.$(By.id("password")).type("SuperSecretPassword!");
 
         // ✅ SOLUTION: waitAndClick() handles visibility + clickability automatically
-        SmartElement.of(driver, By.cssSelector("button[type='submit']")).waitAndClick();
+        SeleniumCraft.$(By.cssSelector("button[type='submit']")).waitAndClick();
 
-        // ✅ SOLUTION: RetryEngine with lambda for flexible wait conditions
-        String successMessage = RetryEngine.retryUntil(
-                () -> SmartElement.of(driver, By.cssSelector(".flash.success")).getText(),
-                text -> text.contains("You logged into a secure area"),
-                10000 // timeout in ms
+        // ✅ SOLUTION: RetryEngine waits until condition is met - no Thread.sleep
+        RetryEngine.retryUntil(
+                () -> SeleniumCraft.$(By.cssSelector(".flash.success")).getText()
+                        .contains("You logged into a secure area"),
+                50, // max retries
+                200 // delay ms between retries
         );
 
+        String successMessage = SeleniumCraft.$(By.cssSelector(".flash.success")).getText();
         Assert.assertTrue(successMessage.contains("You logged into a secure area"));
         System.out.println("✓ Login successful - SeleniumCraft handled all waits automatically");
     }
 
     @Test
     public void testCheckboxesWithSeleniumCraft() {
-        // ✅ SOLUTION: One line replaces 5 lines of WebDriverWait boilerplate
-        // ✅ SOLUTION: waitVisible().waitAndClick() is self-documenting
-        // ✅ SOLUTION: Element list retrieval with automatic wait handling
+        // ✅ SOLUTION: SmartElement with auto-wait replaces verbose WebDriverWait
+        // ✅ SOLUTION: waitAndClick() is self-documenting
+        // ✅ SOLUTION: Automatic retry on element interactions
 
         System.out.println("✅ [SeleniumCraft] Checkbox Test - One-liner element operations");
 
         driver.get("https://the-internet.herokuapp.com/checkboxes");
 
-        // ✅ SOLUTION: Fluent, chainable API with built-in waits
-        var checkboxes = SmartElement.ofMultiple(driver, By.cssSelector("input[type='checkbox']"))
-                .waitVisible();
+        // ✅ SOLUTION: Use DriverContext.getDriver() for raw operations when needed
+        List<WebElement> checkboxes = DriverContext.getDriver()
+                .findElements(By.cssSelector("input[type='checkbox']"));
 
         Assert.assertEquals(checkboxes.size(), 2, "Should have 2 checkboxes");
 
-        // ✅ SOLUTION: Clean, one-line operations for each action
-        checkboxes.get(0).waitAndClick();
-        checkboxes.get(1).waitAndClick();
+        // ✅ SOLUTION: SmartElement for resilient click operations
+        SeleniumCraft.css("input[type='checkbox']:first-child").waitAndClick();
+        SeleniumCraft.css("input[type='checkbox']:last-child").waitAndClick();
 
-        // ✅ SOLUTION: SmartElement automatically re-fetches if element becomes stale
+        // Verify state using raw Selenium (isSelected not in SmartElement)
+        checkboxes = DriverContext.getDriver()
+                .findElements(By.cssSelector("input[type='checkbox']"));
         Assert.assertTrue(checkboxes.get(0).isSelected(), "First checkbox should be checked");
         Assert.assertFalse(checkboxes.get(1).isSelected(), "Second checkbox should be unchecked");
 
@@ -100,22 +110,21 @@ public class SeleniumCraftTest {
 
     @Test
     public void testDropdownWithSeleniumCraft() {
-        // ✅ SOLUTION: No need for separate Select class wrapper
-        // ✅ SOLUTION: selectByText() is more intuitive than Select syntax
-        // ✅ SOLUTION: Automatic wait handling built into every method
+        // ✅ SOLUTION: SmartElement handles waiting automatically
+        // ✅ SOLUTION: Combine SmartElement waits with Select when needed
+        // ✅ SOLUTION: Clean, readable code with built-in resilience
 
         System.out.println("✅ [SeleniumCraft] Dropdown Test - Intuitive select operations");
 
         driver.get("https://the-internet.herokuapp.com/dropdown");
 
-        // ✅ SOLUTION: One-liner with built-in wait and select logic
-        SmartElement.of(driver, By.id("dropdown"))
-                .waitAndSelect("Option 1");
+        // ✅ SOLUTION: Wait for dropdown to be visible, then use Select
+        SeleniumCraft.$(By.id("dropdown")).waitVisible();
+        Select dropdown = new Select(DriverContext.getDriver().findElement(By.id("dropdown")));
+        dropdown.selectByVisibleText("Option 1");
 
-        // ✅ SOLUTION: Getting selected value is simple and readable
-        String selectedValue = SmartElement.of(driver, By.id("dropdown"))
-                .getSelectedText();
-
+        // ✅ SOLUTION: Verify selection
+        String selectedValue = dropdown.getFirstSelectedOption().getText();
         Assert.assertEquals(selectedValue, "Option 1", "Option 1 should be selected");
 
         System.out.println("✓ Dropdown selection completed - Fluent, readable API");
@@ -134,11 +143,12 @@ public class SeleniumCraftTest {
         driver.get("https://the-internet.herokuapp.com/iframe");
 
         // ✅ SOLUTION: Lambda-based context management - guaranteed to switch back
-        FrameHelper.inside(driver, "mce_0_ifr", () -> {
+        // No driver parameter needed - FrameHelper uses DriverContext internally
+        FrameHelper.inside("mce_0_ifr", () -> {
             // Code inside this lambda runs within iframe context
             // Context is automatically restored after lambda completes
 
-            SmartElement contentArea = SmartElement.of(driver, By.id("tinymce"));
+            SmartElement contentArea = SeleniumCraft.$(By.id("tinymce"));
             String iframeText = contentArea.waitVisible().getText();
 
             Assert.assertFalse(iframeText.isEmpty(), "iFrame content should not be empty");
@@ -160,16 +170,22 @@ public class SeleniumCraftTest {
         driver.get("https://the-internet.herokuapp.com/dynamic_loading/1");
 
         // ✅ SOLUTION: Clean, one-liner for button click with auto-wait
-        SmartElement.of(driver, By.cssSelector("button[type='button']"))
-                .waitAndClick();
+        SeleniumCraft.css("button[type='button']").waitAndClick();
 
         // ✅ SOLUTION: RetryEngine elegantly handles wait for dynamic content
-        String loadedText = RetryEngine.retryUntil(
-                () -> SmartElement.of(driver, By.id("finish")).getText(),
-                text -> !text.isEmpty() && text.contains("Hello World!"),
-                15000 // timeout in ms
+        RetryEngine.retryUntil(
+                () -> {
+                    try {
+                        return SeleniumCraft.$(By.id("finish")).getText().contains("Hello World!");
+                    } catch (Exception e) {
+                        return false;
+                    }
+                },
+                75, // max retries
+                200 // delay ms (75 * 200 = 15s max)
         );
 
+        String loadedText = SeleniumCraft.$(By.id("finish")).getText();
         Assert.assertFalse(loadedText.isEmpty(), "Loaded element should contain text");
         System.out.println("✓ Dynamic loading completed - "
                 + "Clean, readable wait condition with automatic retry");

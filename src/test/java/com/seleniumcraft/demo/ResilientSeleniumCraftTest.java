@@ -1,9 +1,11 @@
 package com.seleniumcraft.demo;
 
+import com.seleniumcraft.core.SeleniumCraft;
+import com.seleniumcraft.core.SmartElement;
+import com.seleniumcraft.core.DriverContext;
 import com.seleniumcraft.driver.DriverFactory;
-import com.seleniumcraft.element.SmartElement;
-import com.seleniumcraft.reporting.ExtentReportManager;
 import com.seleniumcraft.wait.RetryEngine;
+import com.seleniumcraft.reporting.ExtentReportManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -49,26 +51,34 @@ public class ResilientSeleniumCraftTest {
         driver.get("https://the-internet.herokuapp.com/dynamic_controls");
 
         // SmartElement doesn't store stale references - it re-queries on each action
-        SmartElement checkbox = SmartElement.of(driver, By.cssSelector("#checkbox input"));
-        SmartElement removeButton = SmartElement.of(driver, By.cssSelector("#checkbox button"));
-        SmartElement message = SmartElement.of(driver, By.id("message"));
+        SmartElement checkbox = SeleniumCraft.css("#checkbox input");
+        SmartElement removeButton = SeleniumCraft.css("#checkbox button");
+        SmartElement message = SeleniumCraft.$(By.id("message"));
 
         ExtentReportManager.logInfo("Created SmartElement references (lazy evaluation)");
 
         // Check initial state
-        boolean initialState = checkbox.isDisplayed();
-        ExtentReportManager.logInfo("Checkbox initially displayed: " + initialState);
+        boolean initialState = checkbox.isVisible();
+        ExtentReportManager.logInfo("Checkbox initially visible: " + initialState);
 
         // Click remove button
         removeButton.waitAndClick();
         ExtentReportManager.logInfo("Clicked 'Remove' button - DOM modified");
 
-        // Wait for message to appear
-        String messageText = RetryEngine.retryUntil(
-                () -> message.getText(),
-                text -> text != null && text.contains("gone"),
-                10000);
+        // Wait for message to appear using RetryEngine
+        RetryEngine.retryUntil(
+                () -> {
+                    try {
+                        return SeleniumCraft.$(By.id("message")).getText().contains("gone");
+                    } catch (Exception e) {
+                        return false;
+                    }
+                },
+                50, // max retries
+                200 // delay ms
+        );
 
+        String messageText = SeleniumCraft.$(By.id("message")).getText();
         ExtentReportManager.logPass("✓ Message received: " + messageText);
         ExtentReportManager.logPass("✓ SeleniumCraft handled DOM changes gracefully - no StaleElementException!");
 
@@ -88,24 +98,24 @@ public class ResilientSeleniumCraftTest {
         driver.get("https://the-internet.herokuapp.com/dynamic_loading/2");
 
         // Click start button
-        SmartElement.of(driver, By.cssSelector("#start button")).waitAndClick();
+        SeleniumCraft.css("#start button").waitAndClick();
         ExtentReportManager.logInfo("Clicked 'Start' button - content loading...");
 
         // ✅ SOLUTION: RetryEngine keeps trying until element appears and has expected
         // text
-        String loadedText = RetryEngine.retryUntil(
+        RetryEngine.retryUntil(
                 () -> {
                     try {
-                        return SmartElement.of(driver, By.cssSelector("#finish h4")).getText();
+                        return SeleniumCraft.css("#finish h4").getText().contains("Hello World");
                     } catch (Exception e) {
-                        return null; // Element not yet present
+                        return false; // Element not yet present
                     }
                 },
-                text -> text != null && !text.isEmpty() && text.contains("Hello World"),
-                15000, // timeout
-                200 // poll interval - check every 200ms
+                75, // max retries
+                200 // delay ms (75 * 200 = 15s max)
         );
 
+        String loadedText = SeleniumCraft.css("#finish h4").getText();
         long duration = System.currentTimeMillis() - startTime;
 
         Assert.assertTrue(loadedText.contains("Hello World"), "Should contain expected text");
@@ -124,28 +134,28 @@ public class ResilientSeleniumCraftTest {
         driver.get("https://the-internet.herokuapp.com/dynamic_controls");
 
         // Enable the text input
-        SmartElement enableButton = SmartElement.of(driver, By.cssSelector("#input-example button"));
-        enableButton.waitAndClick();
+        SeleniumCraft.css("#input-example button").waitAndClick();
 
         ExtentReportManager.logInfo("Clicked 'Enable' button - waiting for loading to complete");
 
         // ✅ SOLUTION: Wait for the message that confirms action is complete
-        String resultMessage = RetryEngine.retryUntil(
+        RetryEngine.retryUntil(
                 () -> {
                     try {
-                        return SmartElement.of(driver, By.id("message")).getText();
+                        return SeleniumCraft.$(By.id("message")).getText().contains("enabled");
                     } catch (Exception e) {
-                        return "";
+                        return false;
                     }
                 },
-                msg -> msg != null && msg.contains("enabled"),
-                10000);
+                50, // max retries
+                200 // delay ms
+        );
 
+        String resultMessage = SeleniumCraft.$(By.id("message")).getText();
         ExtentReportManager.logPass("✓ Operation completed: '" + resultMessage + "'");
 
-        // Verify input is now enabled
-        SmartElement textInput = SmartElement.of(driver, By.cssSelector("#input-example input"));
-        textInput.waitVisible().type("SeleniumCraft handles this gracefully!");
+        // Verify input is now enabled - type into it
+        SeleniumCraft.css("#input-example input").waitVisible().type("SeleniumCraft handles this gracefully!");
 
         ExtentReportManager.logPass("✓ Successfully typed into dynamically enabled input");
         ExtentReportManager.logPass("✓ No transient element issues - smooth handling!");
@@ -162,7 +172,7 @@ public class ResilientSeleniumCraftTest {
 
         driver.get("https://the-internet.herokuapp.com/add_remove_elements/");
 
-        SmartElement addButton = SmartElement.of(driver, By.cssSelector("button[onclick='addElement()']"));
+        SmartElement addButton = SeleniumCraft.css("button[onclick='addElement()']");
 
         ExtentReportManager.logInfo("Adding 5 elements...");
 
@@ -174,11 +184,13 @@ public class ResilientSeleniumCraftTest {
         ExtentReportManager.logInfo("Verifying elements were added...");
 
         // ✅ SOLUTION: Re-query elements each time instead of storing stale list
-        int count = RetryEngine.retryUntil(
-                () -> driver.findElements(By.cssSelector(".added-manually")).size(),
-                size -> size == 5,
-                5000);
+        RetryEngine.retryUntil(
+                () -> DriverContext.getDriver().findElements(By.cssSelector(".added-manually")).size() == 5,
+                25, // max retries
+                200 // delay ms
+        );
 
+        int count = DriverContext.getDriver().findElements(By.cssSelector(".added-manually")).size();
         Assert.assertEquals(count, 5, "Should have 5 delete buttons");
         ExtentReportManager.logInfo("Found " + count + " delete buttons");
 
@@ -187,12 +199,11 @@ public class ResilientSeleniumCraftTest {
 
         for (int i = 0; i < 5; i++) {
             // ✅ SOLUTION: Always query fresh - get the FIRST available button each time
-            SmartElement deleteButton = SmartElement.of(driver, By.cssSelector(".added-manually"));
-            deleteButton.waitAndClick();
+            SeleniumCraft.css(".added-manually").waitAndClick();
         }
 
         // Verify all deleted
-        int remainingCount = driver.findElements(By.cssSelector(".added-manually")).size();
+        int remainingCount = DriverContext.getDriver().findElements(By.cssSelector(".added-manually")).size();
         Assert.assertEquals(remainingCount, 0, "All elements should be deleted");
 
         ExtentReportManager.logPass("✓ All 5 elements added and deleted successfully!");
@@ -211,23 +222,23 @@ public class ResilientSeleniumCraftTest {
         driver.get("https://the-internet.herokuapp.com/dynamic_loading/1");
 
         // Click start
-        SmartElement.of(driver, By.cssSelector("#start button")).waitAndClick();
+        SeleniumCraft.css("#start button").waitAndClick();
         ExtentReportManager.logInfo("Started dynamic loading...");
 
         // ✅ SOLUTION: Smart wait - returns immediately when element appears
-        String text = RetryEngine.retryUntil(
+        RetryEngine.retryUntil(
                 () -> {
                     try {
-                        return SmartElement.of(driver, By.cssSelector("#finish h4")).getText();
+                        return SeleniumCraft.css("#finish h4").getText().contains("Hello World");
                     } catch (Exception e) {
-                        return null;
+                        return false;
                     }
                 },
-                t -> t != null && t.contains("Hello World"),
-                15000,
-                100 // Poll every 100ms for maximum efficiency
+                150, // max retries
+                100 // poll every 100ms for maximum efficiency
         );
 
+        String text = SeleniumCraft.css("#finish h4").getText();
         long duration = System.currentTimeMillis() - startTime;
 
         Assert.assertTrue(text.contains("Hello World"), "Should contain expected text");
@@ -251,37 +262,55 @@ public class ResilientSeleniumCraftTest {
 
         // Step 1: Remove checkbox
         ExtentReportManager.logInfo("Step 1: Removing checkbox...");
-        SmartElement.of(driver, By.cssSelector("#checkbox button")).waitAndClick();
+        SeleniumCraft.css("#checkbox button").waitAndClick();
 
-        String removeMessage = RetryEngine.retryUntil(
-                () -> SmartElement.of(driver, By.id("message")).getText(),
-                msg -> msg != null && msg.contains("gone"),
-                10000);
+        RetryEngine.retryUntil(
+                () -> {
+                    try {
+                        return SeleniumCraft.$(By.id("message")).getText().contains("gone");
+                    } catch (Exception e) {
+                        return false;
+                    }
+                },
+                50, 200);
+        String removeMessage = SeleniumCraft.$(By.id("message")).getText();
         ExtentReportManager.logPass("✓ Checkbox removed: " + removeMessage);
 
         // Step 2: Add checkbox back
         ExtentReportManager.logInfo("Step 2: Adding checkbox back...");
-        SmartElement.of(driver, By.cssSelector("#checkbox button")).waitAndClick();
+        SeleniumCraft.css("#checkbox button").waitAndClick();
 
-        String addMessage = RetryEngine.retryUntil(
-                () -> SmartElement.of(driver, By.id("message")).getText(),
-                msg -> msg != null && msg.contains("back"),
-                10000);
+        RetryEngine.retryUntil(
+                () -> {
+                    try {
+                        return SeleniumCraft.$(By.id("message")).getText().contains("back");
+                    } catch (Exception e) {
+                        return false;
+                    }
+                },
+                50, 200);
+        String addMessage = SeleniumCraft.$(By.id("message")).getText();
         ExtentReportManager.logPass("✓ Checkbox restored: " + addMessage);
 
         // Step 3: Enable text input
         ExtentReportManager.logInfo("Step 3: Enabling text input...");
-        SmartElement.of(driver, By.cssSelector("#input-example button")).waitAndClick();
+        SeleniumCraft.css("#input-example button").waitAndClick();
 
-        String enableMessage = RetryEngine.retryUntil(
-                () -> SmartElement.of(driver, By.id("message")).getText(),
-                msg -> msg != null && msg.contains("enabled"),
-                10000);
+        RetryEngine.retryUntil(
+                () -> {
+                    try {
+                        return SeleniumCraft.$(By.id("message")).getText().contains("enabled");
+                    } catch (Exception e) {
+                        return false;
+                    }
+                },
+                50, 200);
+        String enableMessage = SeleniumCraft.$(By.id("message")).getText();
         ExtentReportManager.logPass("✓ Input enabled: " + enableMessage);
 
         // Step 4: Type in the enabled input
         ExtentReportManager.logInfo("Step 4: Typing in enabled input...");
-        SmartElement.of(driver, By.cssSelector("#input-example input"))
+        SeleniumCraft.css("#input-example input")
                 .waitVisible()
                 .type("SeleniumCraft is awesome!");
         ExtentReportManager.logPass("✓ Successfully typed in input");

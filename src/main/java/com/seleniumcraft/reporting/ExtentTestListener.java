@@ -1,6 +1,6 @@
 package com.seleniumcraft.reporting;
 
-import com.seleniumcraft.driver.DriverFactory;
+import com.seleniumcraft.core.DriverContext;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -41,7 +41,15 @@ public class ExtentTestListener implements ITestListener {
         String testName = result.getMethod().getMethodName();
         Throwable throwable = result.getThrowable();
 
-        WebDriver driver = DriverFactory.getDriver();
+        // Use DriverContext to get the current thread's driver for screenshots
+        WebDriver driver = null;
+        try {
+            driver = DriverContext.getDriver();
+        } catch (Exception e) {
+            // Driver may not be available (e.g., basic Selenium tests without
+            // DriverContext)
+        }
+
         if (driver != null) {
             ExtentReportManager.logFailWithScreenshot(driver, "Test FAILED: " + testName, throwable);
         } else {

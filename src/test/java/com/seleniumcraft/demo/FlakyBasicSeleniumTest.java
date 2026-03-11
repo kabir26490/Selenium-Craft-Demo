@@ -1,5 +1,6 @@
 package com.seleniumcraft.demo;
 
+import com.seleniumcraft.core.DriverContext;
 import com.seleniumcraft.reporting.ExtentReportManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
@@ -36,6 +37,8 @@ public class FlakyBasicSeleniumTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
+        // Register driver with DriverContext so listener can capture screenshots
+        DriverContext.setDriver(driver);
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(5)); // Short timeout to show failures faster
 
@@ -46,6 +49,7 @@ public class FlakyBasicSeleniumTest {
     public void tearDown() {
         if (driver != null) {
             driver.quit();
+            DriverContext.removeDriver();
         }
         ExtentReportManager.removeTest();
     }

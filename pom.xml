@@ -56,10 +56,10 @@
             <version>2.15.1</version>
         </dependency>
 
-        <!-- Local SeleniumCraft library (installed to local repo) -->
+        <!-- SeleniumCraft library (published on Maven Central) -->
         <dependency>
-            <groupId>com.seleniumcraft</groupId>
-            <artifactId>seleniumcraft</artifactId>
+            <groupId>io.github.kabir26490</groupId>
+            <artifactId>selenium-craft</artifactId>
             <version>1.0.0</version>
         </dependency>
 

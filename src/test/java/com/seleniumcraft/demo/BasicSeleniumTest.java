@@ -1,5 +1,6 @@
 package com.seleniumcraft.demo;
 
+import com.seleniumcraft.core.DriverContext;
 import com.seleniumcraft.reporting.ExtentReportManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
@@ -39,6 +40,8 @@ public class BasicSeleniumTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
+        // Register driver with DriverContext so listener can capture screenshots
+        DriverContext.setDriver(driver);
 
         // ❌ PROBLEM: Implicit wait is set globally and can conflict with explicit waits
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -56,6 +59,7 @@ public class BasicSeleniumTest {
     public void tearDown() {
         if (driver != null) {
             driver.quit();
+            DriverContext.removeDriver();
         }
     }
 
