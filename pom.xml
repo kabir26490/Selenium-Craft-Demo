@@ -56,6 +56,13 @@
             <version>2.15.1</version>
         </dependency>
 
+        <!-- Local SeleniumCraft library (installed to local repo) -->
+        <dependency>
+            <groupId>com.seleniumcraft</groupId>
+            <artifactId>seleniumcraft</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>

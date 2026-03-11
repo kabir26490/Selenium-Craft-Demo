@@ -1,4 +1,4 @@
-package main.java.com.seleniumcraft.context;
+package com.seleniumcraft.context;
 
 import org.openqa.selenium.WebDriver;
 
