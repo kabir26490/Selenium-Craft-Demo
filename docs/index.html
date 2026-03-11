@@ -19,48 +19,64 @@
             --font-mono: 'JetBrains Mono', monospace;
         }
 
-        /* 
-           Steve Jobs Aesthetic: Focus o<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="vi *<html lang="enma<head>
-    <metg:    <ox    <meta name="viewport"      <title>SeleniumCraft | Kinetic Engine Architecture</title>
-    <link r:    <link rel="preconnect" href="https://fonts.googleapis.comai    <link rel="preconnect" href="https://fonts.gstatic.com" crmo    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@30 B    <style>
-        :root {
-            --bg-base: #000000;
-            --bg-surface: #0a0a0a;
-            --accent-primary: #ffffff;
-            --ac       backgro            -- 4            --bg-surface: #0a0ie            --accent-primary: #ff"             --accent-subtle: #888888;              --accent-craft    position            --border-muted: rgba(250;            --font-main: 'Outfit', -apple-system, san              --font-mono: 'JetBrains Mono', monospace;
-      (1        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* 
-           Steve Jobs Aesthetal
-       t(6          e <html lang="en">
-<head>
-    <meta charset="UTF-8">
-   
-            pointe    <nt    <meta name="vi *<htmlde    <metg:    <ox    <meta name="viewportx-    <link r:    <link rel="preconnect" href="https://fonts.googleapis.comai    <link rel="preconnect" hreig        :root {
-            --bg-base: #000000;
-            --bg-surface: #0a0a0a;
-            --accent-primary: #ffffff;
-            --ac       backgro            -- 4            --bg-surface: #0a0ie            inter-events            --          -select: none;
-                     --accent-primary: #fftr            --ac       backgro     
-         (1        }
+        body {
+            background-color: var(--bg-base);
+            color: var(--accent-primary);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.03) 1px, transparent 0);
+            background-size: 40px 40px;
+        }
 
-        /* 
-           Steve Jobs Aesthetal
-       t(6          e <html lang="en">
-<head>
-    <meta charset="UTF-8">
-   
-            pointe    <nt    <meta name="vi *<htmlde    <metg:    <ox    <meta name="viewportx-    <link r:    <link rel="preconnect" href="https://fonts.googleapis.comai    <link rel="pd var(--bo
-        /* 
-                er       t(6          e <html la-s<head>
-    <meta charset="UTF-8">
-    7   
-      
-            pointe   0.2em;             color: var(--accent-subtle);
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background:
+                radial-gradient(600px circle at top left, rgba(124,110,245,0.05), transparent),
+                radial-gradient(600px circle at bottom right, rgba(124,110,245,0.03), transparent);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+        }
+
+        .tech-rune {
+            position: fixed;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: rgba(124, 110, 245, 0.15);
+            pointer-events: none;
+            user-select: none;
+            white-space: pre;
+            transform: rotate(-90deg);
+        }
+
+        /* ─── Hero ─── */
+        .hero {
+            padding: 200px 0 140px;
+            text-align: center;
+        }
+
+        .label-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 14px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-muted);
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: var(--accent-subtle);
             text-transform: uppercase;
             margin-bottom: 48px;
         }
@@ -68,247 +84,244 @@
         h1 {
             font-size: clamp(3.5rem, 10vw, 7rem);
             font-weight: 800;
-            --bg-surface: #0a0.0            --accent-primary: #ff5;            --ac       backgro                              --accent-primary: #fftr            --ac       backgro     
-         (1        }
-
-        /* 
-           Steve Jobs Aesar         (1        }
-
-        /* 
-           Steve Jobs Aesthetal
-       t(6    
-        /* 
-       Me          ct       t(6          e <html la {<head>
-    <meta charset="UTF-8">
-         <-t   
-            pointe   
-             /* 
-                er       t(6          e <html la-s<head>
-    <meta charset="UTF-8">
-    7   
-      
-            pointe   0.2em;             color: var(--accent-subtle);
-            te            :     content;
-            background: #050505;
-            padding: 40px;
-            border-r     :             text-transform: uppercase;
-            margin-bottom: 4 b            margin-bottom: 48px;
-    8)        }
-
-        h1 {
-       im
-                      1            font-weight: 800;
-            --bg-s9)            --bg-surface: #0an         (1        }
-
-        /* 
-           Steve Jobs Aesar         (1        }
-
-        /* 
-           Steve Jobs Aesthetal
-       t(6    
-        /* 
-       Me          ct       t(  
-        /* 
-      e-b            
-        /* 
-           Steve Jobs Aesthetal
- ion          ;
-       t(6    
-        /* 
-   l         /* 
-  *       Me .f    <meta charset="UTF-8">
-         <-t   
-            poi           <-t   
-                       p0px             /* 
-                    he    <meta charset="UTF-8">
-    7   
-      
-            ;
-    7   
-      
-                 
-       -f            te            :     content;
-            bac
-                        background: #050505;
-                    padding: 40px;
-                  border-r                   margin-bottom: 4 b            margin-bottom: 48px;
- m;    8)        }
-
-        h1 {
-       im
-                     ent-subtle); font-size: 1.15rem;        ig            --bg-s9)            --bg-surface: #0an da
-        /* 
-           Steve Jobs Aesar         (1        }
-
-                    ac
-        /* 
-           Steve Jobs Aesthetal
- d var(--border-muted);
+            letter-spacing: -0.06em;
+            line-height: 0.85;
+            margin-bottom: 40px;
         }
 
-        .matr        /* 
-          Me lay: grid;
-            grid-templat      e-b  1        /* 
-                     2 ion          ;
-       t(6    om       t(6    11        /* 
-  f   l      0.  *       Me .f}
-         <-t   
-            poi         -b            po
-                        p0px    #5                    he    <meta charset="Uer    7   
-      
-            ;
-    7   
-      
-  }      
-       ix    7   
-   or      
--a     -c       -f       ht            bac
-                        backgrou                                      padding: 40px;
-        dd                  border-r       ro m;    8)        }
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--accent-subtle);
+            max-width: 650px;
+            margin: 0 auto 64px;
+            font-weight: 300;
+            line-height: 1.4;
+        }
 
-        h1 {
-       im
-                     ent-subtle); font-size: 1.15reon
-        h1 {
-             im
- :                   /* 
-           Steve Jobs Aesar         (1        }
+        /* ─── Architecture Grid ─── */
+        .mechanism-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            padding: 120px 0;
+            border-top: 1px solid var(--border-muted);
+        }
 
-                    ac
-        /* 
-           Steve Jons          e(
-                    ac
-        /* 
-          on         /* 
-         op             d var(--border-muted);
-      xe        }
+        .arch-viz {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            background: #050505;
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--border-muted);
+        }
 
-        .ma: 
-                    Me lay: grid;rd            grid-templrd                     2 ion          ;
-       tun       t(6    om       t(6    11    so  f   l      0.  *       Me .f}
-         <ht         <-t   
-            pock      ilter: blu                        p0px    #5     am      
-            ;
-    7   
-      
-  }      
-       ix    7   
-   or      
--a     - s     va    7   
-   uted); margin-top:       i     or      
--a  le-a     -c <b                        backgrou         ce        dd                  border-r       ro m;    8)        }
+        .arch-viz img {
+            width: 100%;
+            filter: invert(1) brightness(0.9);
+        }
 
-        h1 {
-     ">
-        h1 {
-       im
-                     ent-subtle); font: 6       im
- %;        C_RESOLVER_v1.0.0</div>
-<div class="tech-rune" style="to           ht :     SMART_ELE           Steve Jobs A c
-                    ac
-        /* 
-          HEA        /* 
-         </          ti                    ac
-        /di        /* 
-         Au          ng         op             <      xe        }
+        .meta-content h2 {
+            font-size: 3rem;
+            margin-bottom: 80px;
+            letter-spacing: -0.04em;
+        }
 
-        .ma: 
-            p>
-        .ma: 
-  an            it       tun       t(6    om       t(6    11    so  f   l      0.  *       Me .f}
-         <ht   ef         <ht         <-t   
-            pock      ilter: blu                  "c            pock      ilte"m            ;
-    7   
-      
-  }      
-       ix    7   
-   or      
--a     -ic    7   
-   te      
-vg  }  ="       iLifecycle Engineerin-a     - s     uted); margin-top:   s=-a  le-a     -c <b                       ic
-        h1 {
-     ">
-        h1 {
-       im
-                     ent-subtle); font: 6       im
- %;        C_RESOLVER_v1.0.        ">
-   ic      nt       im
- 3>           %;        C_RESOLVER_v1.0.0</div>
-<div class="tets<div class="tech-rune" style="to en                    ac
-        /* 
-          HEA        /* 
-         </          ti  ac        /* 
-                                </          tiea        /di        /* 
-         Au   ass="id">         Au          RA
-        .ma: 
-            p>
-        .ma: 
-  an            it           <p>Frame        .ma: ar  an         t         <ht   ef         <ht         <-t   
-            pock      ilter: blu                  "xc            pock      ilter: blu                 7   
-      
-  }      
-       ix    7   
-   or      
--a     -ic    7   
-   te      
-vg  }S<      
-    }           ih3   or      
--a  ve-a     -ic     te      
-vg  }gavg  }  ="  w        h1 {
-     ">
-        h1 {
-       im
-                     ent-subtle); font: 6       im
- %;        C_RESOLVER_ct     ">
-                    im
-           <d %;      "data-matrix">
+        .feature-block {
+            margin-bottom: 100px;
+            position: relative;
+        }
+
+        .feature-block::before {
+            content: "";
+            position: absolute;
+            left: -30px;
+            top: 10px;
+            width: 2px;
+            height: 20px;
+            background: var(--accent-craft);
+        }
+
+        .id {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-subtle);
+            margin-bottom: 16px;
+            display: block;
+            letter-spacing: 0.1em;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: var(--accent-subtle);
+            font-size: 1.15rem;
+            line-height: 1.6;
+        }
+
+        /* ─── Data Matrix ─── */
+        .data-matrix {
+            margin-top: 80px;
+            padding: 40px;
+            background: #030303;
+            border: 1px solid var(--border-muted);
+        }
+
+        .matrix-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            padding: 24px 0;
+            border-bottom: 1px solid #111;
+            font-size: 0.95rem;
+        }
+
+        .matrix-row:last-child { border-bottom: none; }
+        .matrix-header { color: #555; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700; }
+        .matrix-craft { color: var(--accent-craft); font-weight: 700; }
+
+        /* ─── Button ─── */
+        .btn {
+            display: inline-block;
+            padding: 18px 44px;
+            background: #fff;
+            color: #000;
+            border-radius: 99px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn:hover {
+            background: #f0f0f0;
+            transform: scale(1.02);
+        }
+
+        /* ─── Report ─── */
+        iframe {
+            width: 100%;
+            height: 900px;
+            border: 1px solid var(--border-muted);
+            margin-top: 80px;
+            background: #000;
+        }
+
+        /* ─── Scroll Button ─── */
+        #scrollToTop {
+            display: none;
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 99;
+            border: 1px solid var(--border-muted);
+            outline: none;
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            cursor: pointer;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 18px;
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Technical Calligraphy -->
+<div class="tech-rune" style="top: 20%; left: 2%;">DRIVER_CTX_INIT [0x44]</div>
+<div class="tech-rune" style="top: 60%; left: 2%;">KINETIC_RESOLVER_v1.0.0</div>
+<div class="tech-rune" style="top: 15%; right: 2%;">SMART_ELEMENT_FACTORY</div>
+<div class="tech-rune" style="top: 75%; right: 2%;">HEARTBEAT_POLLING_ACTIVE</div>
+
+<!-- Hero -->
+<section class="hero container">
+    <div class="label-pill">Automation Engineering v2.0</div>
+    <h1>Less Flakiness.<br>More Signal.</h1>
+    <p>SeleniumCraft is an obsession with the last 1% of stability. We don't fix tests; we fix the interaction lifecycle.</p>
+    <a href="#arch" class="btn">Expose Architecture</a>
+</section>
+
+<!-- Architecture -->
+<div id="arch" class="container">
+    <div class="mechanism-grid">
+        <div class="arch-viz">
+            <img src="assets/click-flow-architecture.svg" alt="Kinetic Lifecycle Engineering">
+        </div>
+        <div class="meta-content">
+            <h2>The Kinetic Core.</h2>
+
+            <div class="feature-block">
+                <span class="id">01 / RE-ACQUISITION</span>
+                <h3>Atomic Element Healing</h3>
+                <p>Standard drivers fail when the DOM shifts. Our engine re-acquires the element context within a single event loop, preventing StaleReference before it hits the stack trace.</p>
+            </div>
+
+            <div class="feature-block">
+                <span class="id">02 / TRANSACTIONAL IFRAMES</span>
+                <h3>Scope-Safe Switching</h3>
+                <p>Frame transitions are treated as transactions. FrameHelper ensures the driver state is always restored to zero, even when nested exceptions occur.</p>
+            </div>
+
+            <div class="feature-block">
+                <span class="id">03 / DEEP COMPONENT ACCESS</span>
+                <h3>Shadow-DOM Native</h3>
+                <p>Navigate complex web components through recursive shadow-root resolution. No JavaScript injection, just native, high-performance interactions.</p>
+            </div>
+
+            <div class="data-matrix">
                 <div class="matrix-row matrix-header">
-           3>           %;     IS<div class="tets<div class="tech-rune" style=">
-        /* 
-          HEA        /* 
-         </          ti  ac                    <d         </          ti                                  </   </         Au   ass="id">         Au          RA
-               <div clas        .ma: 
-            p>
-        .ma: 
-                          .ma: iv  an     atrix            pock      ilter: blu                  "xc            pock      ilter: blu                 7   
-  di      
-  }      
-       ix    7   
-   or      
--a     -ic    7   
-   te      
-vg  }S<      
-    }            }           i     or      plate</-a     -ic     te      
-vg  }>Hvg  }S<         }         -a  ve-a     -ic     te      >Zvg  }gavg  }  ="  w        hdi     ">
-        h1 {
-       im</               im
- iv        io %;        C_RESOLVER_ct     ">
-                 40                    im
-       ze           <d %;      c                <div class="matrix-pi           3>           %;  e id="report-iframe" src="a        /* 
-          HEA        /* 
-         </          ti  ac               ="          00         </          tsol               <div clas        .ma: 
-            p>
-        .ma: 
-                          .ma: iv  an     atrix            pock      ilter: blu            it            p>
-        .ma: 
-       CRAFT_ENGINEERING           T_2  di      
-  }      
-       ix    7   
-   or      
--a     -ic    7   
-   te      
-vg  }S<      
-    }            }           i     or      plate</-a    
-   }  div>
-<       i
+                    <div>MECHANISM</div>
+                    <div>SELENIUM</div>
+                    <div>SELENIUMCRAFT</div>
+                </div>
+                <div class="matrix-row">
+                    <div>Stale Handling</div>
+                    <div>Crash</div>
+                    <div class="matrix-craft">Auto-Heal</div>
+                </div>
+                <div class="matrix-row">
+                    <div>Shadow Root</div>
+                    <div>Hidden</div>
+                    <div class="matrix-craft">Accessible</div>
+                </div>
+                <div class="matrix-row">
+                    <div>Boilerplate</div>
+                    <div>High</div>
+                    <div class="matrix-craft">Zero</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-   or      
--a  ll-a     -icle   te      
-vg  }n>vg  }S<   
-     }       Btvg  }>Hvg  }S<         }         -a  ve-a     -ic     te      >Zvg  }gavon        h1 {
-       im</               im
- iv        io %;        C_RESOLVER_ct     ">
-             .o     k = func iv        io %;        C_Rol                 40  r: 'smooth' });
+<!-- Report -->
+<section id="report" class="container" style="padding: 140px 0;">
+    <h2 style="font-size: 3.5rem; text-align: center; letter-spacing: -0.05em;">Empirical Proof.</h2>
+    <iframe src="assets/latest-report.html"></iframe>
+</section>
+
+<!-- Footer -->
+<footer class="container" style="padding: 100px 0; border-top: 1px solid var(--border-muted); color: #333; font-family: var(--font-mono); font-size: 0.7rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div>SELENIUMCRAFT_ENGINEERING // ARTIFACT_2026</div>
+        <div>BUILT BY <a href="https://github.com/kabir26490/Selenium-Craft-Demo" target="_blank" rel="noopener" style="color: #666; font-weight: 700; text-decoration: none;">AAKAR GUPTE</a></div>
+    </div>
+</footer>
+
+<!-- Scroll to Top -->
+<button id="scrollToTop" title="Top">&#8593;</button>
+
+<script>
+    var topBtn = document.getElementById("scrollToTop");
+    window.onscroll = function() {
+        topBtn.style.display = (window.pageYOffset > 500) ? "block" : "none";
+    };
+    topBtn.onclick = function() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
     };
 </script>
 
