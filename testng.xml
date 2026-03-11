@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SeleniumCraft Demo Suite" verbose="2" parallel="false">
+
+    <!-- Global Listeners for Reporting -->
+    <listeners>
+        <listener class-name="com.seleniumcraft.reporting.ExtentTestListener"/>
+    </listeners>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- SECTION 1: FLAKY TESTS (Traditional Selenium - Expected to FAIL)    -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    
+    <test name="❌ Flaky Basic Selenium Tests (Expected Failures)">
+        <classes>
+            <class name="com.seleniumcraft.demo.FlakyBasicSeleniumTest">
+                <methods>
+                    <include name="testStaleElementException_WillFail"/>
+                    <include name="testDynamicLoadingRaceCondition_WillFail"/>
+                    <include name="testDisappearingElement_WillFail"/>
+                    <include name="testRapidClicksStaleElement_WillFail"/>
+                    <include name="testWithThreadSleep_SlowAndFragile"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- SECTION 2: RESILIENT TESTS (SeleniumCraft - All PASS)               -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    
+    <test name="✅ Resilient SeleniumCraft Tests (All Pass)">
+        <classes>
+            <class name="com.seleniumcraft.demo.ResilientSeleniumCraftTest">
+                <methods>
+                    <include name="testStaleElementAutoHealing_Passes"/>
+                    <include name="testDynamicLoadingWithSmartRetry_Passes"/>
+                    <include name="testTransientElementHandling_Passes"/>
+                    <include name="testRapidInteractionsWithAutoRefresh_Passes"/>
+                    <include name="testEfficientSmartWaits_Passes"/>
+                    <include name="testComplexWorkflowWithDynamicElements_Passes"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- SECTION 3: ORIGINAL COMPARISON TESTS                                 -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    
+    <test name="Basic Selenium - Standard Tests">
+        <classes>
+            <class name="com.seleniumcraft.demo.BasicSeleniumTest"/>
+        </classes>
+    </test>
+
+    <test name="SeleniumCraft - Standard Tests">
+        <classes>
+            <class name="com.seleniumcraft.demo.SeleniumCraftTest"/>
+        </classes>
+    </test>
+
+</suite>
