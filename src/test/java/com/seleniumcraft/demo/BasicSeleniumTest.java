@@ -1,4 +1,4 @@
-package com.seleniumcraft.demo;
+package test.java.com.seleniumcraft.demo;
 
 import com.seleniumcraft.reporting.ExtentReportManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
