@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeleniumCraft | Kinetic Engine Architecture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #000000;
+            --bg-surface: #0a0a0a;
+            --accent-primary: #ffffff;
+            --accent-subtle: #888888;
+            --accent-craft: #7c6ef5;
+            --border-muted: rgba(255, 255, 255, 0.08);
+            --font-main: 'Outfit', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--accent-primary);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            /* Subliminal depth via high-precision gradient */
+            background: radial-gradient(circle at 50% -20%, #1a1a1a 0%, #000000 80%);
+            background-attachment: fixed;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(1px 1px at 20px 30px, #eee, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 50px 160px, #ddd, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 130px 80px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 160px 120px, #ddd, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+        }
+
+        .tech-rune {
+            position: fixed;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: rgba(124, 110, 245, 0.15);
+            pointer-events: none;
+            user-select: none;
+            white-space: pre;
+            transform: rotate(-90deg);
+        }
+
+        /* ─── Hero ─── */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .label-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 14px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-muted);
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: var(--accent-subtle);
+            text-transform: uppercase;
+            margin-bottom: 32px;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 800;
+            letter-spacing: -0.06em;
+            line-height: 0.85;
+            margin-bottom: 40px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--accent-subtle);
+            max-width: 650px;
+            margin: 0 auto 48px;
+            font-weight: 300;
+            line-height: 1.4;
+        }
+
+        /* ─── Architecture: Full-Width Image + Stacked Content ─── */
+        .arch-section {
+            padding: 80px 0;
+            border-top: 1px solid var(--border-muted);
+        }
+
+        .arch-viz {
+            background: #050505;
+            padding: 32px;
+            border-radius: 12px;
+            border: 1px solid var(--border-muted);
+            margin-bottom: 64px;
+        }
+
+        .arch-viz img {
+            width: 100%;
+            filter: invert(1) brightness(0.9);
+        }
+
+        .meta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 48px;
+            letter-spacing: -0.04em;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 48px;
+        }
+
+        .feature-block {
+            margin-bottom: 0;
+            position: relative;
+        }
+
+        .feature-block::before {
+            content: "";
+            position: absolute;
+            left: -30px;
+            top: 10px;
+            width: 2px;
+            height: 20px;
+            background: var(--accent-craft);
+        }
+
+        .id {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-subtle);
+            margin-bottom: 16px;
+            display: block;
+            letter-spacing: 0.1em;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        p {
+            color: var(--accent-subtle);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* ─── Apple-Style Comparison Table ─── */
+        .apple-compare {
+            margin-top: 64px;
+            width: 100%;
+        }
+
+        .ac-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            padding: 0 0 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .ac-header-cell {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.01em;
+        }
+
+        .ac-header-cell:not(:first-child) {
+            text-align: center;
+        }
+
+        .ac-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            padding: 22px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            align-items: center;
+        }
+
+        .ac-row:last-child { border-bottom: none; }
+
+        .ac-feature {
+            font-size: 1.05rem;
+            color: #d1d5db;
+            font-weight: 400;
+        }
+
+        .ac-val {
+            text-align: center;
+            font-size: 1.4rem;
+        }
+
+        .ac-val.bad  { color: #ff3b30; }
+        .ac-val.good { color: #30d158; }
+
+        /* ─── Button ─── */
+        .btn {
+            display: inline-block;
+            padding: 18px 44px;
+            background: #fff;
+            color: #000;
+            border-radius: 99px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn:hover {
+            background: #f0f0f0;
+            transform: scale(1.02);
+        }
+
+        /* ─── Report ─── */
+        iframe {
+            width: 100%;
+            height: 700px;
+            border: 1px solid var(--border-muted);
+            margin-top: 40px;
+            background: #000;
+        }
+
+        /* ─── Scroll Button ─── */
+        #scrollToTop {
+            display: none;
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 99;
+            border: 1px solid var(--border-muted);
+            outline: none;
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            cursor: pointer;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 18px;
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Technical Calligraphy -->
+<div class="tech-rune" style="top: 20%; left: 2%;">DRIVER_CTX_INIT [0x44]</div>
+<div class="tech-rune" style="top: 60%; left: 2%;">KINETIC_RESOLVER_v1.0.0</div>
+<div class="tech-rune" style="top: 15%; right: 2%;">SMART_ELEMENT_FACTORY</div>
+<div class="tech-rune" style="top: 75%; right: 2%;">HEARTBEAT_POLLING_ACTIVE</div>
+
+<!-- Hero -->
+<section class="hero container">
+    <div class="label-pill">Automation Engineering v2.0</div>
+    <h1>Less Flakiness.<br>More Signal.</h1>
+    <p>SeleniumCraft is an obsession with the last 1% of stability. We don't fix tests; we fix the interaction lifecycle.</p>
+    <a href="#arch" class="btn">Expose Architecture</a>
+</section>
+
+<!-- Architecture -->
+<div id="arch" class="container arch-section">
+    <div class="meta-content">
+        <h2>The Kinetic Core.</h2>
+
+        <div class="arch-viz">
+            <img src="docs/assets/click-flow-architecture.svg" alt="Kinetic Lifecycle Engineering">
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-block">
+                <span class="id">01 / RE-ACQUISITION</span>
+                <h3>Atomic Element Healing</h3>
+                <p>Standard drivers fail when the DOM shifts. Our engine re-acquires the element context within a single event loop, preventing StaleReference before it hits the stack trace.</p>
+            </div>
+
+            <div class="feature-block">
+                <span class="id">02 / TRANSACTIONAL IFRAMES</span>
+                <h3>Scope-Safe Switching</h3>
+                <p>Frame transitions are treated as transactions. FrameHelper ensures the driver state is always restored to zero, even when nested exceptions occur.</p>
+            </div>
+
+            <div class="feature-block">
+                <span class="id">03 / DEEP COMPONENT ACCESS</span>
+                <h3>Shadow-DOM Native</h3>
+                <p>Navigate complex web components through recursive shadow-root resolution. No JavaScript injection, just native, high-performance interactions.</p>
+            </div>
+        </div>
+
+        <div class="apple-compare">
+            <div class="ac-header">
+                <div class="ac-header-cell"></div>
+                <div class="ac-header-cell">Selenium</div>
+                <div class="ac-header-cell">SeleniumCraft</div>
+            </div>
+            <div class="ac-row">
+                <div class="ac-feature">Stale Element Recovery</div>
+                <div class="ac-val bad">&#x2715;</div>
+                <div class="ac-val good">&#x2714;</div>
+            </div>
+            <div class="ac-row">
+                <div class="ac-feature">Shadow-DOM Access</div>
+                <div class="ac-val bad">&#x2715;</div>
+                <div class="ac-val good">&#x2714;</div>
+            </div>
+            <div class="ac-row">
+                <div class="ac-feature">iFrame Auto-Restore</div>
+                <div class="ac-val bad">&#x2715;</div>
+                <div class="ac-val good">&#x2714;</div>
+            </div>
+            <div class="ac-row">
+                <div class="ac-feature">Zero Boilerplate</div>
+                <div class="ac-val bad">&#x2715;</div>
+                <div class="ac-val good">&#x2714;</div>
+            </div>
+            <div class="ac-row">
+                <div class="ac-feature">Smart Retry Engine</div>
+                <div class="ac-val bad">&#x2715;</div>
+                <div class="ac-val good">&#x2714;</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Report -->
+<section id="report" class="container" style="padding: 80px 0;">
+    <h2 style="font-size: 2.5rem; text-align: center; letter-spacing: -0.04em;">Empirical Proof.</h2>
+    <iframe src="docs/assets/latest-report.html"></iframe>
+</section>
+
+<!-- Footer -->
+<footer class="container" style="padding: 64px 0 32px; border-top: 1px solid var(--border-muted); color: #333; font-family: var(--font-mono); font-size: 0.7rem;">
+    <div style="display: flex; flex-direction: column; gap: 24px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 0.65rem; color: #1a1a1a;">
+            <div>NAME: AAKAR GUPTE</div>
+            <div>STATUS: FAANG-READY</div>
+            <div>REPO: <a href="https://github.com/kabir26490/Selenium-Craft-Demo" target="_blank" rel="noopener" style="color: #444; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05);">GITHUB.COM/KABIR26490/SELENIUM-CRAFT-DEMO</a></div>
+            <div>LICENSE: MIT_OPEN_SOURCE</div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.02); padding-top: 32px;">
+            <div>SELENIUMCRAFT_ENGINEERING // ARTIFACT_2026</div>
+            <div style="letter-spacing: 0.2em; color: #555;">&copy; ALL RIGHTS RESERVED</div>
+        </div>
+    </div>
+</footer>
+
+<!-- Scroll to Top -->
+<button id="scrollToTop" title="Top">&#8593;</button>
+
+<script>
+    var topBtn = document.getElementById("scrollToTop");
+    window.onscroll = function() {
+        topBtn.style.display = (window.pageYOffset > 500) ? "block" : "none";
+    };
+    topBtn.onclick = function() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+</script>
+
+</body>
+</html>
