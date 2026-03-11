@@ -155,35 +155,64 @@
         }
 
         h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            font-weight: 700;
         }
 
         p {
             color: var(--accent-subtle);
-            font-size: 1.15rem;
-            line-height: 1.6;
+            font-size: 1rem;
+            line-height: 1.7;
         }
 
-        /* ─── Data Matrix ─── */
-        .data-matrix {
-            margin-top: 0;
-            padding: 32px;
-            background: #030303;
-            border: 1px solid var(--border-muted);
-        }
-
-        .matrix-row {
+        /* ─── Comparison Cards (Apple-Style) ─── */
+        .comparison-cards {
+            margin-top: 60px;
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            padding: 24px 0;
-            border-bottom: 1px solid #111;
-            font-size: 0.95rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
         }
 
-        .matrix-row:last-child { border-bottom: none; }
-        .matrix-header { color: #555; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700; }
-        .matrix-craft { color: var(--accent-craft); font-weight: 700; }
+        .comparison-card {
+            padding: 48px 40px;
+            background: transparent;
+            border: 1px solid var(--border-muted);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .comparison-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .comparison-item {
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .comparison-item:last-child { border-bottom: none; }
+
+        .item-label {
+            font-size: 0.95rem;
+            color: #999;
+        }
+
+        .item-value {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .value-bad { color: #e74c3c; }
+        .value-good { color: var(--accent-craft); }
 
         /* ─── Button ─── */
         .btn {
@@ -276,28 +305,39 @@
             </div>
         </div>
 
-            <div class="data-matrix">
-                <div class="matrix-row matrix-header">
-                    <div>MECHANISM</div>
-                    <div>SELENIUM</div>
-                    <div>SELENIUMCRAFT</div>
+        <div class="comparison-cards">
+            <div class="comparison-card">
+                <div class="comparison-title">Traditional Selenium</div>
+                <div class="comparison-item">
+                    <div class="item-label">Stale Handling</div>
+                    <div class="item-value value-bad">Crash</div>
                 </div>
-                <div class="matrix-row">
-                    <div>Stale Handling</div>
-                    <div>Crash</div>
-                    <div class="matrix-craft">Auto-Heal</div>
+                <div class="comparison-item">
+                    <div class="item-label">Shadow Root</div>
+                    <div class="item-value value-bad">Hidden</div>
                 </div>
-                <div class="matrix-row">
-                    <div>Shadow Root</div>
-                    <div>Hidden</div>
-                    <div class="matrix-craft">Accessible</div>
-                </div>
-                <div class="matrix-row">
-                    <div>Boilerplate</div>
-                    <div>High</div>
-                    <div class="matrix-craft">Zero</div>
+                <div class="comparison-item">
+                    <div class="item-label">Boilerplate</div>
+                    <div class="item-value value-bad">High</div>
                 </div>
             </div>
+
+            <div class="comparison-card">
+                <div class="comparison-title">SeleniumCraft</div>
+                <div class="comparison-item">
+                    <div class="item-label">Stale Handling</div>
+                    <div class="item-value value-good">Auto-Heal</div>
+                </div>
+                <div class="comparison-item">
+                    <div class="item-label">Shadow Root</div>
+                    <div class="item-value value-good">Accessible</div>
+                </div>
+                <div class="comparison-item">
+                    <div class="item-label">Boilerplate</div>
+                    <div class="item-value value-good">Zero</div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
