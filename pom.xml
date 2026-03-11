@@ -56,14 +56,27 @@
             <version>2.15.1</version>
         </dependency>
 
-        <!-- SeleniumCraft library (published on Maven Central) -->
-        <dependency>
-            <groupId>io.github.kabir26490</groupId>
-            <artifactId>selenium-craft</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
     </dependencies>
+
+        <!-- Note: selenium-craft moved into an optional profile below -->
+    </dependencies>
+
+    <profiles>
+        <!-- Activate with -Pseleniumcraft to include the library on the classpath -->
+        <profile>
+            <id>seleniumcraft</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>io.github.kabir26490</groupId>
+                    <artifactId>selenium-craft</artifactId>
+                    <version>1.0.0</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>
