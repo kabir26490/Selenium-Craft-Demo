@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="760" viewBox="0 0 1400 760">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d122b"/>
+      <stop offset="1" stop-color="#171d45"/>
+    </linearGradient>
+    <linearGradient id="legacy" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3a1534"/>
+      <stop offset="1" stop-color="#251537"/>
+    </linearGradient>
+    <linearGradient id="craft" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#10253f"/>
+      <stop offset="1" stop-color="#15255a"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#9aa5e8"/>
+    </marker>
+  </defs>
+
+  <rect width="1400" height="760" fill="url(#bg)"/>
+  <text x="60" y="70" font-family="Arial, sans-serif" font-size="34" fill="#f2f5ff" font-weight="700">Click Execution Architecture — Traditional Selenium vs SeleniumCraft</text>
+  <text x="60" y="105" font-family="Arial, sans-serif" font-size="18" fill="#bfc8f4">Same user action, different execution pipeline and reliability outcome.</text>
+
+  <rect x="60" y="140" width="620" height="560" rx="22" fill="url(#legacy)" stroke="#f472b6" stroke-opacity="0.45"/>
+  <rect x="720" y="140" width="620" height="560" rx="22" fill="url(#craft)" stroke="#22d3ee" stroke-opacity="0.45"/>
+
+  <text x="90" y="188" font-family="Arial, sans-serif" font-size="24" fill="#ffd8ee" font-weight="700">Traditional Selenium Flow</text>
+  <text x="750" y="188" font-family="Arial, sans-serif" font-size="24" fill="#bdf6ff" font-weight="700">SeleniumCraft Flow</text>
+
+  <rect x="90" y="220" width="560" height="72" rx="12" fill="#211638"/>
+  <text x="112" y="265" font-family="Arial, sans-serif" font-size="18" fill="#f2e7ff">Test code calls driver.findElement(...).click()</text>
+
+  <rect x="90" y="325" width="560" height="72" rx="12" fill="#211638"/>
+  <text x="112" y="370" font-family="Arial, sans-serif" font-size="18" fill="#f2e7ff">Single element reference captured from current DOM state</text>
+
+  <rect x="90" y="430" width="560" height="72" rx="12" fill="#211638"/>
+  <text x="112" y="475" font-family="Arial, sans-serif" font-size="18" fill="#f2e7ff">DOM mutates / element re-renders / timing shifts</text>
+
+  <rect x="90" y="535" width="560" height="120" rx="12" fill="#3d1737" stroke="#f472b6" stroke-opacity="0.35"/>
+  <text x="112" y="575" font-family="Arial, sans-serif" font-size="18" fill="#ffd6ec">Failure path:</text>
+  <text x="112" y="607" font-family="Arial, sans-serif" font-size="17" fill="#ffd6ec">StaleElementReferenceException / NoSuchElementException</text>
+  <text x="112" y="635" font-family="Arial, sans-serif" font-size="17" fill="#ffd6ec">Team adds sleep/retry boilerplate manually</text>
+
+  <line x1="370" y1="292" x2="370" y2="325" stroke="#9aa5e8" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="370" y1="397" x2="370" y2="430" stroke="#9aa5e8" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="370" y1="502" x2="370" y2="535" stroke="#9aa5e8" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="750" y="220" width="560" height="72" rx="12" fill="#11243e"/>
+  <text x="772" y="265" font-family="Arial, sans-serif" font-size="18" fill="#e8f8ff">Test code calls SeleniumCraft.$(...).waitAndClick()</text>
+
+  <rect x="750" y="325" width="560" height="72" rx="12" fill="#11243e"/>
+  <text x="772" y="370" font-family="Arial, sans-serif" font-size="18" fill="#e8f8ff">SmartElement stores locator (not stale DOM reference)</text>
+
+  <rect x="750" y="430" width="560" height="72" rx="12" fill="#11243e"/>
+  <text x="772" y="475" font-family="Arial, sans-serif" font-size="18" fill="#e8f8ff">RetryEngine + smart waits re-fetch and re-attempt safely</text>
+
+  <rect x="750" y="535" width="560" height="120" rx="12" fill="#11314a" stroke="#22d3ee" stroke-opacity="0.35"/>
+  <text x="772" y="575" font-family="Arial, sans-serif" font-size="18" fill="#c7fbff">Success path:</text>
+  <text x="772" y="607" font-family="Arial, sans-serif" font-size="17" fill="#c7fbff">Stable click despite transient UI change</text>
+  <text x="772" y="635" font-family="Arial, sans-serif" font-size="17" fill="#c7fbff">Lower flakiness, faster suite feedback, less maintenance</text>
+
+  <line x1="1030" y1="292" x2="1030" y2="325" stroke="#9aa5e8" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="1030" y1="397" x2="1030" y2="430" stroke="#9aa5e8" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="1030" y1="502" x2="1030" y2="535" stroke="#9aa5e8" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="550" y="690" width="300" height="42" rx="10" fill="#1f2758"/>
+  <text x="571" y="718" font-family="Arial, sans-serif" font-size="17" fill="#e6ebff">Decision: choose resilience at the architecture layer</text>
+</svg>
