@@ -67,12 +67,12 @@ public class FlakyBasicSeleniumTest {
 
         // Store reference to checkbox
         WebElement checkbox = wait.until(
-                ExpectedConditions.presenceOfElementLocated(By.cssSelector("#checkbox input")));
+                ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@type='checkbox']")));
 
         ExtentReportManager.logInfo("Stored reference to checkbox element");
 
         // Click the Remove button - this will remove the checkbox from DOM
-        WebElement removeButton = driver.findElement(By.cssSelector("#checkbox button"));
+        WebElement removeButton = driver.findElement(By.xpath("//form[@id='checkbox-example']/button"));
         removeButton.click();
 
         ExtentReportManager.logInfo("Clicked 'Remove' button - DOM will be modified");
@@ -106,7 +106,7 @@ public class FlakyBasicSeleniumTest {
         driver.get("https://the-internet.herokuapp.com/dynamic_loading/2");
 
         // Click start button
-        WebElement startButton = driver.findElement(By.cssSelector("#start button"));
+        WebElement startButton = driver.findElement(By.cssSelector("#start > button"));
         startButton.click();
 
         ExtentReportManager.logInfo("Clicked 'Start' button - content loading...");

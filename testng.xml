@@ -26,37 +26,18 @@
     </test>
 
     <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <!-- SECTION 2: RESILIENT TESTS (SeleniumCraft - All PASS)               -->
+    <!-- SECTION 2: DEMO SUITES (Kept: Flaky + SeleniumCraft)                 -->
     <!-- ═══════════════════════════════════════════════════════════════════ -->
-    
-    <test name="✅ Resilient SeleniumCraft Tests (All Pass)">
-        <classes>
-            <class name="com.seleniumcraft.demo.ResilientSeleniumCraftTest">
-                <methods>
-                    <include name="testStaleElementAutoHealing_Passes"/>
-                    <include name="testDynamicLoadingWithSmartRetry_Passes"/>
-                    <include name="testTransientElementHandling_Passes"/>
-                    <include name="testRapidInteractionsWithAutoRefresh_Passes"/>
-                    <include name="testEfficientSmartWaits_Passes"/>
-                    <include name="testComplexWorkflowWithDynamicElements_Passes"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
 
-    <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <!-- SECTION 3: ORIGINAL COMPARISON TESTS                                 -->
-    <!-- ═══════════════════════════════════════════════════════════════════ -->
-    
-    <test name="Basic Selenium - Standard Tests">
-        <classes>
-            <class name="com.seleniumcraft.demo.BasicSeleniumTest"/>
-        </classes>
-    </test>
-
-    <test name="SeleniumCraft - Standard Tests">
+    <test name="SeleniumCraft - Demo">
         <classes>
             <class name="com.seleniumcraft.demo.SeleniumCraftTest"/>
+        </classes>
+    </test>
+
+    <test name="Flaky Basic Selenium - Demo">
+        <classes>
+            <class name="com.seleniumcraft.demo.FlakyBasicSeleniumTest"/>
         </classes>
     </test>
 

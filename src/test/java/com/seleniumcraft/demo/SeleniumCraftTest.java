@@ -6,7 +6,6 @@ import com.seleniumcraft.core.DriverContext;
 import com.seleniumcraft.driver.DriverFactory;
 import com.seleniumcraft.context.FrameHelper;
 import com.seleniumcraft.wait.RetryEngine;
-import com.seleniumcraft.reporting.ExtentReportManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -170,7 +169,7 @@ public class SeleniumCraftTest {
         driver.get("https://the-internet.herokuapp.com/dynamic_loading/1");
 
         // ✅ SOLUTION: Clean, one-liner for button click with auto-wait
-        SeleniumCraft.css("button[type='button']").waitAndClick();
+        SeleniumCraft.css("#start > button").waitAndClick();
 
         // ✅ SOLUTION: RetryEngine elegantly handles wait for dynamic content
         RetryEngine.retryUntil(
