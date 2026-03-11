@@ -1,4 +1,4 @@
-package test.java.com.seleniumcraft.demo;
+package com.seleniumcraft.demo;
 
 import com.seleniumcraft.driver.DriverFactory;
 import com.seleniumcraft.element.SmartElement;
