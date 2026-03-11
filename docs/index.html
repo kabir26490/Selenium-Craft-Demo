@@ -62,7 +62,7 @@
 
         /* ─── Hero ─── */
         .hero {
-            padding: 200px 0 140px;
+            padding: 120px 0 80px;
             text-align: center;
         }
 
@@ -78,11 +78,11 @@
             letter-spacing: 0.2em;
             color: var(--accent-subtle);
             text-transform: uppercase;
-            margin-bottom: 48px;
+            margin-bottom: 32px;
         }
 
         h1 {
-            font-size: clamp(3.5rem, 10vw, 7rem);
+            font-size: clamp(3rem, 8vw, 5.5rem);
             font-weight: 800;
             letter-spacing: -0.06em;
             line-height: 0.85;
@@ -93,28 +93,23 @@
             font-size: 1.5rem;
             color: var(--accent-subtle);
             max-width: 650px;
-            margin: 0 auto 64px;
+            margin: 0 auto 48px;
             font-weight: 300;
             line-height: 1.4;
         }
 
-        /* ─── Architecture Grid ─── */
-        .mechanism-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 100px;
-            padding: 120px 0;
+        /* ─── Architecture: Full-Width Image + Stacked Content ─── */
+        .arch-section {
+            padding: 80px 0;
             border-top: 1px solid var(--border-muted);
         }
 
         .arch-viz {
-            position: sticky;
-            top: 100px;
-            height: fit-content;
             background: #050505;
-            padding: 40px;
-            border-radius: 8px;
+            padding: 32px;
+            border-radius: 12px;
             border: 1px solid var(--border-muted);
+            margin-bottom: 64px;
         }
 
         .arch-viz img {
@@ -123,13 +118,20 @@
         }
 
         .meta-content h2 {
-            font-size: 3rem;
-            margin-bottom: 80px;
+            font-size: 2.5rem;
+            margin-bottom: 48px;
             letter-spacing: -0.04em;
         }
 
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 48px;
+        }
+
         .feature-block {
-            margin-bottom: 100px;
+            margin-bottom: 0;
             position: relative;
         }
 
@@ -165,8 +167,8 @@
 
         /* ─── Data Matrix ─── */
         .data-matrix {
-            margin-top: 80px;
-            padding: 40px;
+            margin-top: 0;
+            padding: 32px;
             background: #030303;
             border: 1px solid var(--border-muted);
         }
@@ -203,9 +205,9 @@
         /* ─── Report ─── */
         iframe {
             width: 100%;
-            height: 900px;
+            height: 700px;
             border: 1px solid var(--border-muted);
-            margin-top: 80px;
+            margin-top: 40px;
             background: #000;
         }
 
@@ -246,14 +248,15 @@
 </section>
 
 <!-- Architecture -->
-<div id="arch" class="container">
-    <div class="mechanism-grid">
+<div id="arch" class="container arch-section">
+    <div class="meta-content">
+        <h2>The Kinetic Core.</h2>
+
         <div class="arch-viz">
             <img src="assets/click-flow-architecture.svg" alt="Kinetic Lifecycle Engineering">
         </div>
-        <div class="meta-content">
-            <h2>The Kinetic Core.</h2>
 
+        <div class="features-grid">
             <div class="feature-block">
                 <span class="id">01 / RE-ACQUISITION</span>
                 <h3>Atomic Element Healing</h3>
@@ -271,6 +274,7 @@
                 <h3>Shadow-DOM Native</h3>
                 <p>Navigate complex web components through recursive shadow-root resolution. No JavaScript injection, just native, high-performance interactions.</p>
             </div>
+        </div>
 
             <div class="data-matrix">
                 <div class="matrix-row matrix-header">
@@ -294,18 +298,17 @@
                     <div class="matrix-craft">Zero</div>
                 </div>
             </div>
-        </div>
     </div>
 </div>
 
 <!-- Report -->
-<section id="report" class="container" style="padding: 140px 0;">
-    <h2 style="font-size: 3.5rem; text-align: center; letter-spacing: -0.05em;">Empirical Proof.</h2>
+<section id="report" class="container" style="padding: 80px 0;">
+    <h2 style="font-size: 2.5rem; text-align: center; letter-spacing: -0.04em;">Empirical Proof.</h2>
     <iframe src="assets/latest-report.html"></iframe>
 </section>
 
 <!-- Footer -->
-<footer class="container" style="padding: 100px 0; border-top: 1px solid var(--border-muted); color: #333; font-family: var(--font-mono); font-size: 0.7rem;">
+<footer class="container" style="padding: 48px 0; border-top: 1px solid var(--border-muted); color: #333; font-family: var(--font-mono); font-size: 0.7rem;">
     <div style="display: flex; justify-content: space-between; align-items: center;">
         <div>SELENIUMCRAFT_ENGINEERING // ARTIFACT_2026</div>
         <div>BUILT BY <a href="https://github.com/kabir26490/Selenium-Craft-Demo" target="_blank" rel="noopener" style="color: #666; font-weight: 700; text-decoration: none;">AAKAR GUPTE</a></div>
