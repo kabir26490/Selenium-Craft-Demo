@@ -8,7 +8,8 @@ import org.testng.ITestResult;
 
 /**
  * ExtentTestListener - TestNG listener that integrates with ExtentReports.
- * Automatically creates tests, logs results, and captures screenshots on failure.
+ * Automatically creates tests, logs results, and captures screenshots on
+ * failure.
  */
 public class ExtentTestListener implements ITestListener {
 
@@ -39,7 +40,7 @@ public class ExtentTestListener implements ITestListener {
     public void onTestFailure(ITestResult result) {
         String testName = result.getMethod().getMethodName();
         Throwable throwable = result.getThrowable();
-        
+
         WebDriver driver = DriverFactory.getDriver();
         if (driver != null) {
             ExtentReportManager.logFailWithScreenshot(driver, "Test FAILED: " + testName, throwable);
@@ -49,7 +50,7 @@ public class ExtentTestListener implements ITestListener {
                 ExtentReportManager.getTest().fail(throwable);
             }
         }
-        
+
         System.out.println("❌ FAILED: " + testName);
         if (throwable != null) {
             System.out.println("   Reason: " + throwable.getMessage());
