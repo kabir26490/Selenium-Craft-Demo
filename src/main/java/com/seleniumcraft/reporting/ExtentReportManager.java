@@ -31,13 +31,13 @@ public class ExtentReportManager {
         if (extent == null) {
             String timestamp = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date());
             reportPath = "test-output/extent-reports/TestReport_" + timestamp + ".html";
-            
+
             ExtentSparkReporter sparkReporter = new ExtentSparkReporter(reportPath);
             sparkReporter.config().setDocumentTitle("SeleniumCraft Test Report");
             sparkReporter.config().setReportName("Selenium vs SeleniumCraft Comparison");
             sparkReporter.config().setTheme(Theme.DARK);
             sparkReporter.config().setTimeStampFormat("yyyy-MM-dd HH:mm:ss");
-            
+
             extent = new ExtentReports();
             extent.attachReporter(sparkReporter);
             extent.setSystemInfo("OS", System.getProperty("os.name"));
@@ -113,7 +113,7 @@ public class ExtentReportManager {
     /**
      * Captures a screenshot and saves it to the screenshots folder.
      *
-     * @param driver     The WebDriver instance
+     * @param driver         The WebDriver instance
      * @param screenshotName Name for the screenshot file
      * @return Path to the saved screenshot
      */
@@ -143,8 +143,8 @@ public class ExtentReportManager {
             if (screenshotPath != null) {
                 try {
                     test.fail(message)
-                        .fail(throwable)
-                        .addScreenCaptureFromPath("../" + screenshotPath);
+                            .fail(throwable)
+                            .addScreenCaptureFromPath("../" + screenshotPath);
                 } catch (Exception e) {
                     test.fail(message).fail(throwable);
                 }

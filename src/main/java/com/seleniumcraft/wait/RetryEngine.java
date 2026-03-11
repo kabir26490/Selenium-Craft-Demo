@@ -36,8 +36,8 @@ public class RetryEngine {
      * @return The value when condition is met
      * @throws RuntimeException if timeout is reached
      */
-    public static <T> T retryUntil(Supplier<T> supplier, Predicate<T> condition, 
-                                    long timeoutMs, long pollInterval) {
+    public static <T> T retryUntil(Supplier<T> supplier, Predicate<T> condition,
+            long timeoutMs, long pollInterval) {
         long startTime = System.currentTimeMillis();
         T result = null;
         Exception lastException = null;
@@ -62,10 +62,9 @@ public class RetryEngine {
         }
 
         String message = String.format(
-            "RetryEngine timeout after %dms. Last result: %s",
-            timeoutMs, result
-        );
-        
+                "RetryEngine timeout after %dms. Last result: %s",
+                timeoutMs, result);
+
         if (lastException != null) {
             throw new RuntimeException(message, lastException);
         }

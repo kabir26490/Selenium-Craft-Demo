@@ -4,12 +4,14 @@ import org.openqa.selenium.WebDriver;
 
 /**
  * FrameHelper - Safe iframe context management with automatic cleanup.
- * Guarantees that driver switches back to default content even if exceptions occur.
+ * Guarantees that driver switches back to default content even if exceptions
+ * occur.
  */
 public class FrameHelper {
 
     /**
-     * Executes an action inside a frame context, automatically switching back afterwards.
+     * Executes an action inside a frame context, automatically switching back
+     * afterwards.
      * Uses try-finally internally to guarantee context restoration.
      *
      * @param driver        The WebDriver instance
@@ -26,7 +28,8 @@ public class FrameHelper {
     }
 
     /**
-     * Executes an action inside a frame context by index, automatically switching back.
+     * Executes an action inside a frame context by index, automatically switching
+     * back.
      *
      * @param driver     The WebDriver instance
      * @param frameIndex The zero-based frame index
@@ -44,9 +47,10 @@ public class FrameHelper {
     /**
      * Executes an action inside nested frames, automatically switching back.
      *
-     * @param driver      The WebDriver instance
-     * @param frameNames  Array of frame names/ids to navigate through (outermost first)
-     * @param action      The action to perform inside the innermost frame
+     * @param driver     The WebDriver instance
+     * @param frameNames Array of frame names/ids to navigate through (outermost
+     *                   first)
+     * @param action     The action to perform inside the innermost frame
      */
     public static void insideNested(WebDriver driver, String[] frameNames, Runnable action) {
         try {

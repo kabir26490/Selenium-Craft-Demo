@@ -11,8 +11,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * SmartElement - Auto-healing element wrapper with built-in waits and retry logic.
- * Automatically handles StaleElementReferenceException by re-fetching the element.
+ * SmartElement - Auto-healing element wrapper with built-in waits and retry
+ * logic.
+ * Automatically handles StaleElementReferenceException by re-fetching the
+ * element.
  */
 public class SmartElement {
 
@@ -80,8 +82,12 @@ public class SmartElement {
                 wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
                 return;
             } catch (StaleElementReferenceException | ElementClickInterceptedException e) {
-                if (i == maxRetries - 1) throw e;
-                try { Thread.sleep(500); } catch (InterruptedException ignored) {}
+                if (i == maxRetries - 1)
+                    throw e;
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException ignored) {
+                }
             }
         }
     }
@@ -99,7 +105,8 @@ public class SmartElement {
                 return;
             } catch (StaleElementReferenceException e) {
                 element = null; // Force re-fetch
-                if (i == maxRetries - 1) throw e;
+                if (i == maxRetries - 1)
+                    throw e;
             }
         }
     }

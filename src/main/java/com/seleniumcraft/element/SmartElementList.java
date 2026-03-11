@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * SmartElementList - A wrapper for List<SmartElement> that provides chainable methods.
+ * SmartElementList - A wrapper for List<SmartElement> that provides chainable
+ * methods.
  * Enables fluent API for multiple element operations.
  */
 public class SmartElementList extends ArrayList<SmartElement> {
