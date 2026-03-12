@@ -1,103 +1,82 @@
-# 🚀 SeleniumCraft Demo
+# SeleniumCraft: Kinetic Interaction Standard
+> **Architectural Paradigm for 2026 Test Engineering.**
 
-> **A side-by-side comparison of Raw Selenium vs SeleniumCraft library**
+[![Documentation Status](https://img.shields.io/badge/docs-live-brightgreen)](https://kabir26490.github.io/Selenium-Craft-Demo/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-This project demonstrates the dramatic difference between traditional Selenium WebDriver code and the modern, resilient SeleniumCraft library approach.
-
----
-
-## 📋 Overview
-
-| Feature | Raw Selenium ❌ | SeleniumCraft ✅ |
-|---------|----------------|------------------|
-| Element waits | Manual `Thread.sleep()` or verbose `WebDriverWait` | Auto-wait built into every action |
-| Stale elements | `StaleElementReferenceException` crashes | Auto-healing with retry logic |
-| iFrame handling | Manual `switchTo().frame()` / `defaultContent()` | `FrameHelper.inside()` with auto-restore |
-| Code verbosity | 5-10 lines per action | 1 line per action |
-| Flaky tests | Common | Rare |
+**SeleniumCraft** is a high-precision architectural layer over Selenium 4. It treats web interactions as **Atomic Transactions**, eliminating the flakiness of traditional WebDriver scripts through a **Kinetic Execution Engine**.
 
 ---
 
-## 🏗️ Project Structure
+## 🏛️ Architectural Intelligence
+This repository is an empirical demonstration of technical superiority over "Raw Selenium."
 
+### The Kinetic Engine vs. Standard WebDriver
+Our engine moves beyond passive element polling. It implements a **Re-acquisition Lifecycle**:
+1. **Contextual Awareness:** Active monitoring of the DOM during the interaction event loop.
+2. **Atomic Healing:** Transparently resolving `StaleElementReferenceException` before it breaks the thread.
+3. **Transactional Scoping:** Automated state recovery for nested iFrames and Shadow-DOM trees.
+
+---
+
+## 📂 Project Anatomy
 ```
-seleniumcraft-demo/
-├── pom.xml                          # Maven configuration
-├── testng.xml                       # TestNG suite configuration
+Selenium-Craft-Demo/
+├── index.html                  # [LIVE] Obsidian-Brutalist Architecture Documentation
+├── docs/
+│   ├── assets/                 # Technical Calligraphy, SVG Blueprints, Visual Proofs
+│   │   └── click-flow-architecture.svg
+│   └── test-output/            # Archival Trace Reports
 ├── src/
-│   ├── main/java/com/seleniumcraft/
-│   │   ├── core/SeleniumCraft.java       # Fluent API ($, css, xpath)
-│   │   ├── driver/DriverFactory.java     # Browser initialization
-│   │   ├── element/SmartElement.java     # Auto-healing element wrapper
-│   │   ├── wait/RetryEngine.java         # Lambda-based retry logic
-│   │   ├── context/FrameHelper.java      # Safe iframe management
-│   │   └── reporting/
-│   │       ├── ExtentReportManager.java  # HTML report generation
-│   │       └── ExtentTestListener.java   # TestNG listener
-│   └── test/java/com/seleniumcraft/demo/
-│       ├── BasicSeleniumTest.java        # Traditional Selenium (OLD WAY)
-│       ├── SeleniumCraftTest.java        # SeleniumCraft (NEW WAY)
-│       ├── FlakyBasicSeleniumTest.java   # Tests that FAIL with raw Selenium
-│       └── ResilientSeleniumCraftTest.java # Same tests PASS with SeleniumCraft
-└── test-output/
-    └── extent-reports/               # HTML test reports with screenshots
+│   ├── main/java/              # Core Engineering Logic
+│   │   ├── core/               # Fluent API Facade ($ / css / xpath)
+│   │   ├── element/            # SmartElement: The Atomic Unit of Interaction
+│   │   ├── context/            # FrameHelper: Transactional Scope Management
+│   │   └── wait/               # RetryEngine: High-Frequency Polling Standard
+│   └── test/java/              # Empirical Comparisons
+│       ├── SeleniumCraftTest.java         # [PASS] Kinetic Stability Proof
+│       └── BasicSeleniumTest.java         # [FAIL] Legacy Instability Baseline
+├── pom.xml                     # dependency Management (Java 21 / Selenium 4)
+└── testng.xml                  # Execution Orchestration
 ```
 
 ---
 
-## 🛠️ Technologies
+## 🚀 Live Documentation
+The architectural narrative, including the **Kinetic Interaction Lifecycle** diagram and performance benchmarks, is hosted live:
 
-- **Java 21**
-- **Selenium WebDriver 4.18.1**
-- **TestNG 7.9.0**
-- **WebDriverManager 5.7.0**
-- **ExtentReports 5.1.1**
-- **Maven**
+👉 **[https://kabir26490.github.io/Selenium-Craft-Demo/](https://kabir26490.github.io/Selenium-Craft-Demo/)**
 
 ---
 
-## 🚀 Quick Start
+## 💻 Tech Stack
+- **Runtime:** Java 21 (LTS)
+- **Engine:** Selenium 4.18.1
+- **Discovery:** WebDriverManager 5.7.0
+- **Orchestration:** TestNG 7.9.0
+- **Observability:** ExtentReports 5.1.1 (Metadata-rich artifacts)
 
-### Prerequisites
-- Java 21+
-- Maven 3.8+
-- Chrome browser
+---
 
-### Build & Run
-
+## 🛠️ Local Execution
 ```bash
 # Clone the repository
 git clone https://github.com/kabir26490/Selenium-Craft-Demo.git
 cd Selenium-Craft-Demo
 
-# Build the project
-mvn clean install -DskipTests
+# Execute Empirical Comparison
+mvn clean test
 
-# Run all tests
-mvn test
-
-# Run only flaky tests (expected to fail)
-mvn test -Dtest=FlakyBasicSeleniumTest
-
-# Run only resilient tests (all pass)
-mvn test -Dtest=ResilientSeleniumCraftTest
-
-# Open test report (macOS)
-open test-output/extent-reports/*.html
+# View Latest Artifact (macOS)
+open docs/assets/latest-report.html
 ```
 
 ---
 
-## 📊 Test Reports
-
-After running tests, beautiful HTML reports are generated:
-
-```
-test-output/extent-reports/TestReport_YYYY-MM-DD_HH-mm-ss.html
-```
-
-Features:
-- ✅ Pass/Fail status with details
+## 👤 Author
+**Aakar Gupte**  
+*Senior Automation Architect | FAANG-Ready Engineering*  
+[GitHub Profile](https://github.com/kabir26490)
 - 📸 Automatic screenshots on failure
 - 📈 Test categorization
 - ⏱️ Execution time tracking
