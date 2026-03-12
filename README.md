@@ -22,20 +22,19 @@ Our engine moves beyond passive element polling. It implements a **Re-acquisitio
 ## 📂 Project Anatomy
 ```
 Selenium-Craft-Demo/
-├── index.html                  # [LIVE] Obsidian-Brutalist Architecture Documentation
-├── docs/
-│   ├── assets/                 # Technical Calligraphy, SVG Blueprints, Visual Proofs
-│   │   └── click-flow-architecture.svg
+├── index.html                  # [LIVE] Obsidian Architecture Root
+├── docs/                       # Technical Assets & Infrastructure
+│   ├── assets/                 # Architecture Blueprints & Evidence
+│   │   ├── click-flow-architecture.svg
+│   │   └── latest-report.html  # Standardized Verification Result
 │   └── test-output/            # Archival Trace Reports
 ├── src/
-│   ├── main/java/              # Core Engineering Logic
-│   │   ├── core/               # Fluent API Facade ($ / css / xpath)
-│   │   ├── element/            # SmartElement: The Atomic Unit of Interaction
-│   │   ├── context/            # FrameHelper: Transactional Scope Management
-│   │   └── wait/               # RetryEngine: High-Frequency Polling Standard
-│   └── test/java/              # Empirical Comparisons
+│   ├── main/java/com/seleniumcraft/
+│   │   └── reporting/          # Kinetic Observability (ExtentReports)
+│   └── test/java/com/seleniumcraft/demo/
 │       ├── SeleniumCraftTest.java         # [PASS] Kinetic Stability Proof
-│       └── BasicSeleniumTest.java         # [FAIL] Legacy Instability Baseline
+│       └── FlakyBasicSeleniumTest.java    # [FAIL] Legacy Instability Baseline
+├── test-output/                # Local Dynamic Reports & Screenshots
 ├── pom.xml                     # dependency Management (Java 21 / Selenium 4)
 └── testng.xml                  # Execution Orchestration
 ```
