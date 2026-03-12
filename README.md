@@ -74,7 +74,6 @@ open docs/assets/latest-report.html
 
 ## 👤 Author
 **Aakar Gupte**  
-*Senior Automation Architect | FAANG-Ready Engineering*  
 [GitHub Profile](https://github.com/kabir26490)
 - 📸 Automatic screenshots on failure
 - 📈 Test categorization
