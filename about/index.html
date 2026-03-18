@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | SeleniumCraft</title>
+    <meta name="description" content="About SeleniumCraft and its reliability-first test automation architecture.">
+    <style>
+        :root {
+            --bg: #050505;
+            --panel: #0e0e0e;
+            --text: #f5f5f5;
+            --muted: #b3b3b3;
+            --border: rgba(255, 255, 255, 0.12);
+            --accent: #7c6ef5;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            background: radial-gradient(circle at 15% 0%, #1a1a1a, var(--bg) 55%);
+            line-height: 1.6;
+        }
+
+        main {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 56px 24px 72px;
+        }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 28px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: clamp(2rem, 6vw, 3rem);
+            line-height: 1.1;
+        }
+
+        p {
+            margin: 0 0 16px;
+            color: var(--muted);
+        }
+
+        .kpis {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            margin: 26px 0;
+        }
+
+        .kpi {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px;
+        }
+
+        .kpi strong {
+            display: block;
+            font-size: 1.2rem;
+            color: var(--text);
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 11px 18px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .btn.primary {
+            background: var(--accent);
+            border-color: transparent;
+            color: #fff;
+        }
+
+        .btn:hover { filter: brightness(1.08); }
+    </style>
+</head>
+<body>
+<main>
+    <article class="card" aria-labelledby="about-heading">
+        <h1 id="about-heading">About SeleniumCraft</h1>
+        <p>SeleniumCraft is a reliability-first automation approach designed to reduce flaky test behavior by treating interactions as transactional lifecycles.</p>
+        <p>The project demonstrates practical patterns for stale-element healing, resilient waits, and deterministic iframe/shadow-dom handling in modern Selenium suites.</p>
+
+        <section class="kpis" aria-label="Project highlights">
+            <div class="kpi">
+                <strong>Java 21</strong>
+                <span>Modern runtime baseline</span>
+            </div>
+            <div class="kpi">
+                <strong>Selenium 4</strong>
+                <span>W3C-compliant WebDriver stack</span>
+            </div>
+            <div class="kpi">
+                <strong>ExtentReports</strong>
+                <span>Actionable execution insights</span>
+            </div>
+        </section>
+
+        <div class="actions">
+            <a class="btn primary" href="../">Back to Home</a>
+            <a class="btn" href="../docs/index.html">Docs View</a>
+            <a class="btn" href="https://github.com/kabir26490/Selenium-Craft-Demo" target="_blank" rel="noopener">GitHub Repository</a>
+        </div>
+    </article>
+</main>
+</body>
+</html>

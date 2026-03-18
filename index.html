@@ -239,6 +239,23 @@
             transform: scale(1.02);
         }
 
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
         /* ─── Report ─── */
         iframe {
             width: 100%;
@@ -281,7 +298,10 @@
     <div class="label-pill">Automation Engineering v2.0</div>
     <h1>Less Flakiness.<br>More Signal.</h1>
     <p>SeleniumCraft is an obsession with the last 1% of stability. We don't fix tests; we fix the interaction lifecycle.</p>
-    <a href="#arch" class="btn">Expose Architecture</a>
+    <div class="hero-actions">
+        <a href="#arch" class="btn">Expose Architecture</a>
+        <a href="about/" class="btn btn-secondary">About</a>
+    </div>
 </section>
 
 <!-- Architecture -->
