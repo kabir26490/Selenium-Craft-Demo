@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        html { scroll-behavior: smooth; }
+
         :root {
             --bg-base: #000000;
             --bg-surface: #0a0a0a;
@@ -57,6 +59,59 @@
             position: relative;
         }
 
+        .top-nav {
+            position: sticky;
+            top: 0;
+            z-index: 120;
+            backdrop-filter: blur(12px);
+            background: rgba(5, 5, 5, 0.75);
+            border-bottom: 1px solid var(--border-muted);
+        }
+
+        .nav-inner {
+            min-height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+        }
+
+        .brand {
+            text-decoration: none;
+            color: var(--accent-primary);
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            font-size: 0.95rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-link {
+            color: #c4c4c4;
+            text-decoration: none;
+            font-size: 0.84rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 99px;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
         .tech-rune {
             position: fixed;
             font-family: var(--font-mono);
@@ -70,7 +125,7 @@
 
         /* ─── Hero ─── */
         .hero {
-            padding: 120px 0 80px;
+            padding: 92px 0 80px;
             text-align: center;
         }
 
@@ -256,6 +311,84 @@
             background: rgba(255, 255, 255, 0.08);
         }
 
+        .hero-subgrid {
+            margin-top: 36px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .stat-chip {
+            border: 1px solid var(--border-muted);
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            padding: 14px 12px;
+            text-align: left;
+        }
+
+        .stat-chip b {
+            display: block;
+            color: #f4f4f4;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .stat-chip span {
+            color: #9a9a9a;
+            font-size: 0.9rem;
+        }
+
+        .site-footer {
+            padding: 64px 0 32px;
+            border-top: 1px solid var(--border-muted);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            color: #9a9a9a;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+        }
+
+        .footer-link {
+            color: #e5e7eb;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .footer-base {
+            margin-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+            color: #7d7d7d;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+        }
+
+        @media (max-width: 960px) {
+            .container { padding: 0 22px; }
+            .features-grid { grid-template-columns: 1fr; gap: 26px; }
+            .feature-block::before { left: -14px; }
+            .hero-subgrid { grid-template-columns: 1fr; }
+            iframe { height: 520px; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 640px) {
+            .tech-rune { display: none; }
+            h1 { line-height: 0.95; }
+            .hero p { font-size: 1.15rem; margin-bottom: 32px; }
+            .nav-inner { padding: 10px 0; align-items: flex-start; }
+            .nav-links { justify-content: flex-start; }
+            .footer-base { flex-direction: column; align-items: flex-start; }
+        }
+
         /* ─── Report ─── */
         iframe {
             width: 100%;
@@ -287,6 +420,20 @@
 </head>
 <body>
 
+<header class="top-nav">
+    <div class="container nav-inner">
+        <a class="brand" href="../">SELENIUMCRAFT</a>
+        <ul class="nav-links" aria-label="Primary">
+            <li><a class="nav-link" href="../">Home</a></li>
+            <li><a class="nav-link" href="#arch">Architecture</a></li>
+            <li><a class="nav-link" href="#report">Report</a></li>
+            <li><a class="nav-link" href="../about/">About</a></li>
+            <li><a class="nav-link" href="index.html">Docs</a></li>
+            <li><a class="nav-link" href="https://github.com/kabir26490/Selenium-Craft-Demo" target="_blank" rel="noopener">GitHub</a></li>
+        </ul>
+    </div>
+</header>
+
 <!-- Technical Calligraphy -->
 <div class="tech-rune" style="top: 20%; left: 2%;">DRIVER_CTX_INIT [0x44]</div>
 <div class="tech-rune" style="top: 60%; left: 2%;">KINETIC_RESOLVER_v1.0.0</div>
@@ -301,6 +448,11 @@
     <div class="hero-actions">
         <a href="#arch" class="btn">Expose Architecture</a>
         <a href="../about/" class="btn btn-secondary">About</a>
+    </div>
+    <div class="hero-subgrid" aria-label="Project highlights">
+        <div class="stat-chip"><b>Java 21 + Selenium 4</b><span>Modern runtime and WebDriver stack</span></div>
+        <div class="stat-chip"><b>Reliability First</b><span>Stale-element healing and smart retries</span></div>
+        <div class="stat-chip"><b>Observable Results</b><span>Latest Extent report embedded below</span></div>
     </div>
 </section>
 
@@ -375,18 +527,16 @@
 </section>
 
 <!-- Footer -->
-<footer class="container" style="padding: 64px 0 32px; border-top: 1px solid var(--border-muted); color: #333; font-family: var(--font-mono); font-size: 0.7rem;">
-    <div style="display: flex; flex-direction: column; gap: 24px;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 0.65rem; color: #1a1a1a;">
-            <div>NAME: AAKAR GUPTE</div>
-            <div>STATUS: FAANG-READY</div>
-            <div>REPO: <a href="https://github.com/kabir26490/Selenium-Craft-Demo" target="_blank" rel="noopener" style="color: #444; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05);">GITHUB.COM/KABIR26490/SELENIUM-CRAFT-DEMO</a></div>
-            <div>LICENSE: MIT_OPEN_SOURCE</div>
-        </div>
-        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.02); padding-top: 32px;">
-            <div>SELENIUMCRAFT_ENGINEERING // ARTIFACT_2026</div>
-            <div style="letter-spacing: 0.2em; color: #555;">&copy; ALL RIGHTS RESERVED</div>
-        </div>
+<footer class="container site-footer">
+    <div class="footer-grid">
+        <div>OWNER: AAKAR GUPTE</div>
+        <div>STATUS: AUTOMATION ARCHITECTURE DEMO</div>
+        <div>LICENSE: MIT OPEN SOURCE</div>
+        <div>REPO: <a class="footer-link" href="https://github.com/kabir26490/Selenium-Craft-Demo" target="_blank" rel="noopener">github.com/kabir26490/Selenium-Craft-Demo</a></div>
+    </div>
+    <div class="footer-base">
+        <div>SELENIUMCRAFT ENGINEERING // ARTIFACT 2026</div>
+        <div>&copy; ALL RIGHTS RESERVED</div>
     </div>
 </footer>
 
